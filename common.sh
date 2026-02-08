@@ -10,6 +10,7 @@ B="\e[34m"
 N="\e[0m"
 SCRIPT_DIR=$PWD
 START_TIME=$(date +%s)
+MONGODB_HOST="mongodb.repaka.online"
 
 check_root(){
     if [ $USERID -ne 0 ]; then
