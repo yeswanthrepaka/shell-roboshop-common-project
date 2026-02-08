@@ -39,5 +39,5 @@ auto_restart(){
 print_total_time(){
     END_TIME=$(date +%s)
     TOTAL_TIME=$(( $END_TIME - $START_TIME ))"
-    echo -e "$B Script completion time: $TOTAL_TIME SECONDS $N"
+    echo -e "$G Script completion time: $TOTAL_TIME SECONDS $N"
 }
