@@ -34,6 +34,7 @@ rm -rf /etc/nginx/nginx.conf
 cp $SCRIPT_DIR/nginx.conf /etc/nginx/nginx.conf
 VALIDATE $? "Copied the nginx conf file"
 
-auto_restart
+systemctl restart nginx 
+VALIDATE $? "Restarting nginx"
 
 print_total_time
