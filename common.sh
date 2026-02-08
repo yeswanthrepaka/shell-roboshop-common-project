@@ -28,12 +28,6 @@ VALIDATE (){
     fi
 }
 
-enable_start(){
-    systemctl enable $APP_NAME &>>$LOGS_FILE
-    systemctl start $APP_NAME 
-    VALIDATE $? "Enabling and Starting $APP_NAME"
-}
-
 auto_restart(){
     systemctl restart $APP_NAME
     VALIDATE $? "Restarting $APP_NAME"

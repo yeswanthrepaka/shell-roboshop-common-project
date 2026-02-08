@@ -12,7 +12,9 @@ VALIDATE $? "Copying mongo repo"
 dnf install mongodb-org -y &>>$LOGS_FILE
 VALIDATE $? "Installing mongodb"
 
-enable_start
+systemctl enable mongod &>>$LOGS_FILE
+systemctl start mongod
+VALIDATE $? "Enabling and starting $APP_NAME"
 
 sed -i s/127.0.0.1/0.0.0.0/g /etc/mongod.conf 
 VALIDATE $? "Allowing remote connection"
