@@ -38,5 +38,5 @@ auto_restart(){
 
 print_total_time(){
     END_TIME=$(date +%s)
-    echo "Script completion time: $($START_TIME - $END_TIME)"
+    echo "Script completion time: $(($START_TIME - $END_TIME))"
 }
