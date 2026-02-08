@@ -31,6 +31,56 @@ VALIDATE (){
     fi
 }
 
+nodejs_installation(){
+    dnf module disable nodejs -y &>>$LOGS_FILE
+    VALIDATE $? "Disabling nodejs default version"
+
+    dnf module enable nodejs:20 -y &>>$LOGS_FILE
+    VALIDATE $? "Enabling nodejs version 20"
+
+    dnf install nodejs -y &>>$LOGS_FILE
+    VALIDATE $? "Installing nodejs"
+}
+
+app_setup(){
+    id roboshop &>>$LOGS_FILE
+    if [ $? -ne 0 ]; then
+        useradd --system --home /app --shell /sbin/nologin --comment "roboshop system user" roboshop
+        VALIDATE $? "Adding roboshop user"
+    else
+        echo -e "$Y Roboshop user already exists... SKIPPING $N"
+    fi
+
+    mkdir -p /app
+    VALIDATE $? "Creating app directory"
+
+    curl -o /tmp/$APP_NAME.zip https://roboshop-artifacts.s3.amazonaws.com/catalogue-v3.zip 
+    VALIDATE $? "Dowloading code"
+
+    cd /app
+    VALIDATE $? "Moving to app directiory"
+
+    rm -rf /app/*
+    VALIDATE $? "Removing older files"
+
+    unzip /tmp/$APP_NAME.zip
+    VALIDATE $? "Unzipping the code"
+
+    npm install &>>$LOGS_FILE
+    VALIDATE $? "Installing dependencies"
+}
+
+systemd_setup(){
+    systemctl daemon-reload
+    VALIDATE $? "Daemon reload"
+
+    systemctl enable $APP_NAME &>>$LOGS_FILE
+    VALIDATE $? "Enabling $APP_NAME"
+
+    systemctl start $APP_NAME
+    VALIDATE $? "Starting $APP_NAME"
+}
+
 auto_restart(){
     systemctl restart $APP_NAME
     VALIDATE $? "Restarting $APP_NAME"
