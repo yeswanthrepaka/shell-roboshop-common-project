@@ -8,6 +8,7 @@ G="\e[32m"
 Y="\e[33m"
 B="\e[34m"
 N="\e[0m"
+SCRIPT_DIR=$PWD
 
 check_root(){
     if [ $USERID -ne 0 ]; then
