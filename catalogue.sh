@@ -1,6 +1,6 @@
 #!/bin/bash
 
-spurce ./common.sh
+source ./common.sh
 
 APP_NAME="catalogue"
 
