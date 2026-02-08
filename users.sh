@@ -5,8 +5,8 @@ source ./common.sh
 APP_NAME="user"
 
 check_root
-nodejs_installation
 app_setup
+nodejs_installation
 
 cp $SCRIPT_DIR/user.service /etc/systemd/system/user.service
 VALIDATE $? "Creating systemctl services"
