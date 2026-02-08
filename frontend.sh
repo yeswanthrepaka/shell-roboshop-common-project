@@ -31,7 +31,7 @@ VALIDATE $? "Unzipping the content"
 
 rm -rf /etc/nginx/nginx.conf
 
-cp $SCRIPT_DIR/nginx.conf /etc/nginx/nginx.conf
+cp nginx.conf /etc/nginx/nginx.conf
 VALIDATE $? "Copied the nginx conf file"
 
 systemctl restart nginx 
