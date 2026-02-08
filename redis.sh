@@ -21,3 +21,5 @@ VALIDATE $? "Allowing remote connections"
 systemctl enable redis &>>$LOGS_FILE
 systemctl start redis 
 VALIDATE $? "Enabling and starting redis"
+
+print_total_time
