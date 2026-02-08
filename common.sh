@@ -38,6 +38,6 @@ auto_restart(){
 
 print_total_time(){
     END_TIME=$(date +%s)
-    TOTAL_TIME=$(($START_TIME - $END_TIME))"
-    echo -E "$B Script completion time: $TOTAL_TIME SECONDS $N"
+    TOTAL_TIME=$(($END_TIME - $START_TIME))"
+    echo -e "$B Script completion time: $TOTAL_TIME SECONDS $N"
 }
