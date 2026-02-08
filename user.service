@@ -3,7 +3,7 @@ Description = User Service
 [Service]
 User=roboshop
 Environment=MONGO=true
-// highlight-startS
+// highlight-start
 Environment=REDIS_URL='redis://redis.repaka.online:6379'
 Environment=MONGO_URL="mongodb://mongodb.repaka.online:27017/users"
 // highlight-end
