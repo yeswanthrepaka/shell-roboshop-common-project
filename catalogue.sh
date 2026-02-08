@@ -8,8 +8,8 @@ check_root
 app_setup
 nodejs_installation
 
-cp $SCRIPT_DIR/catalogue.service /etc/systemd/system/catalogue.service
-VALIDATE $? "Created systemctl service"
+# cp $SCRIPT_DIR/catalogue.service /etc/systemd/system/catalogue.service
+# VALIDATE $? "Created systemctl service"
 
 systemd_setup
 
