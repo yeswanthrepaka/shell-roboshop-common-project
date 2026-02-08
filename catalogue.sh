@@ -8,12 +8,12 @@ check_root
 nodejs_installation
 app_setup
 
-cp $SCRIPT_NAME/catalogue.service /etc/systemd/system/catalogue.service
+cp $SCRIPT_DIR/catalogue.service /etc/systemd/system/catalogue.service
 VALIDATE $? "Created systemctl service"
 
 systemd_setup
 
-cp $SCRIPT_NAME/mongo.repo /etc/yum.repos.d/mongo.repo
+cp $SCRIPT_DIR/mongo.repo /etc/yum.repos.d/mongo.repo
 
 dnf install mongodb-mongosh -y &>>$LOGS_FILE
 VALIDATE $? "Installing mongodb"
