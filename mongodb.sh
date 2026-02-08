@@ -2,8 +2,6 @@
 
 source ./common.sh
 
-APP_NAME="Mmongodb"
-
 check_root
 
 cp $SCRIPT_DIR/mongo.repo /etc/yum.repos.d/mongo.repo
@@ -19,4 +17,7 @@ VALIDATE $? "Enabling and starting $APP_NAME"
 sed -i s/127.0.0.1/0.0.0.0/g /etc/mongod.conf 
 VALIDATE $? "Allowing remote connection"
 
-auto_restart
+systemctl restart mongod
+VALIDATE $? "Restarting $APP_NAME"
+
+print_total_time
