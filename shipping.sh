@@ -39,7 +39,7 @@ VALIDATE $? "Installing and building shipping"
 mv target/shipping-1.0.jar shipping.jar &>>$LOGS_FILE
 VALIDATE $? "Cleaning package and renaming the jar file as shipping"
 
-cp $SCRIPT_NAME/shipping.service /etc/systemd/system/shipping.service
+cp $SCRIPT_DIR/shipping.service /etc/systemd/system/shipping.service
 VALIDATE $? "Copying shipping service file"
 
 systemd_setup
