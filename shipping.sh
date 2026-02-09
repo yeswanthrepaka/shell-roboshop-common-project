@@ -1,11 +1,26 @@
 #!/bin/bash
 
 source ./common.sh
-app_name=shipping
 
 check_root
+
+mkdir -p $LOGS_FOLDER
+
+dnf install maven -y &>>$LOGS_FILE
+VALIDATE $? "Installing maven"
+
 app_setup
-java_setup
+
+cd /app
+mvn clean package 
+VALIDATE $? "Installing and building shipping"
+
+mv target/shipping-1.0.jar shipping.jar &>>$LOGS_FILE
+VALIDATE $? "Cleaning package and renaming the jar file as shipping"
+
+cp $SCRIPT_NAME/shipping.service /etc/systemd/system/shipping.service
+VALIDATE $? "Copying shipping service file"
+
 systemd_setup
 
 dnf install mysql -y  &>>$LOGS_FILE
