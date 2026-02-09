@@ -1,13 +1,9 @@
 #!/bin/bash
 
 source ./common.sh
-
-APP_NAME="shipping"
+app_name=shipping
 
 check_root
-
-mkdir -p $LOGS_FOLDER
-
 app_setup
 java_setup
 systemd_setup
@@ -27,5 +23,4 @@ else
 fi
 
 auto_restart
-
 print_total_time

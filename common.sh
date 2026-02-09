@@ -55,7 +55,7 @@ java_setup(){
     mvn clean package 
     VALIDATE $? "Installing and building shipping"
 
-    mv target/shipping-1.0.jar shipping.jar &>>$LOGS_FILE
+    mv target/$APP_NAME-1.0.jar $APP_NAME.jar
     VALIDATE $? "Cleaning package and renaming the jar file as shipping"
 }
 
