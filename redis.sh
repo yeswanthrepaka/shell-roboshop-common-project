@@ -2,6 +2,8 @@
 
 source ./common.sh
 
+mkdir -p $LOGS_FOLDER
+
 dnf module disable redis -y &>>$LOGS_FILE
 VALIDATE $? "Disabling default redis"
 
