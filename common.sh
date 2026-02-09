@@ -47,6 +47,18 @@ nodejs_installation(){
     VALIDATE $? "Installing dependencies"
 }
 
+java_setup(){
+    dnf install maven -y &>>$LOGS_FILE
+    VALIDATE $? "Installing maven"
+
+    cd /app
+    mvn clean package 
+    VALIDATE $? "Installing and building shipping"
+
+    mv target/shipping-1.0.jar shipping.jar &>>$LOGS_FILE
+    VALIDATE $? "Cleaning package and renaming the jar file as shipping"
+}
+
 app_setup(){
     id roboshop &>>$LOGS_FILE
     if [ $? -ne 0 ]; then
@@ -70,19 +82,6 @@ app_setup(){
 
     unzip /tmp/$APP_NAME.zip
     VALIDATE $? "Unzipping the code"
-}
-
-java_setup(){
-    dnf install maven -y &>>$LOGS_FILE
-    VALIDATE $? "Installing maven"
-
-    cd /app
-    mvn clean package 
-    VALIDATE $? "Installing and building shipping"
-
-    mv target/shipping-1.0.jar shipping.jar &>>$LOGS_FILE
-    VALIDATE $? "Cleaning package and renaming the jar file as shipping"
-
 }
 
 systemd_setup(){
