@@ -9,7 +9,28 @@ mkdir -p $LOGS_FOLDER
 dnf install maven -y &>>$LOGS_FILE
 VALIDATE $? "Installing maven"
 
-app_setup
+id roboshop &>>$LOGS_FILE
+    if [ $? -ne 0 ]; then
+        useradd --system --home /app --shell /sbin/nologin --comment "roboshop system user" roboshop
+        VALIDATE $? "Adding roboshop user"
+    else
+        echo -e "$Y User already exists... SKIPPING $N"
+    fi
+
+mkdir -p /app
+VALIDATE $? "Adding app directory"
+
+curl -L -o /tmp/shipping.zip https://roboshop-artifacts.s3.amazonaws.com/shipping-v3.zip 
+VALIDATE $? "Downloadig the code"
+
+cd /app
+VALIDATE $? "Moving to app directory" 
+
+rm -rf /app/*
+VALIDATE $? "Removing default if exists"
+
+unzip /tmp/shipping.zip
+VALIDATE $? "Unzipping the code"
 
 cd /app
 mvn clean package 
