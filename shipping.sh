@@ -6,8 +6,8 @@ check_root
 
 mkdir -p $LOGS_FOLDER
 
-java_setup
 app_setup
+java_setup
 systemd_setup
 
 dnf install mysql -y  &>>$LOGS_FILE
