@@ -11,6 +11,7 @@ N="\e[0m"
 SCRIPT_DIR=$PWD
 START_TIME=$(date +%s)
 MONGODB_HOST="mongodb.repaka.online"
+MYSQL_HOST="mysql.repaka.online"
 
 check_root(){
     if [ $USERID -ne 0 ]; then
@@ -41,6 +42,9 @@ nodejs_installation(){
 
     dnf install nodejs -y &>>$LOGS_FILE
     VALIDATE $? "Installing nodejs"
+
+    npm install &>>$LOGS_FILE
+    VALIDATE $? "Installing dependencies"
 }
 
 app_setup(){
@@ -66,9 +70,19 @@ app_setup(){
 
     unzip /tmp/$APP_NAME.zip
     VALIDATE $? "Unzipping the code"
+}
 
-    npm install &>>$LOGS_FILE
-    VALIDATE $? "Installing dependencies"
+java_setup(){
+    dnf install maven -y &>>$LOGS_FILE
+    VALIDATE $? "Installing maven"
+
+    cd /app
+    mvn clean package 
+    VALIDATE $? "Installing and building shipping"
+
+    mv target/shipping-1.0.jar shipping.jar &>>$LOGS_FILE
+    VALIDATE $? "Cleaning package and renaming the jar file as shipping"
+
 }
 
 systemd_setup(){
