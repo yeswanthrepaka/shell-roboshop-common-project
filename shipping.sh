@@ -1,7 +1,7 @@
 #!/bin/bash
 
 source ./common.sh
-
+APP_NAME=shipping
 check_root
 
 mkdir -p $LOGS_FOLDER
